@@ -134,7 +134,7 @@ impl Config {
             } else {
                 let addr_str = dump.value_of("addr").unwrap();
                 let addr = if addr_str.starts_with("0x") {
-                    u32::from_str_radix(addr_str.trim_left_matches("0x"), 16)
+                    u32::from_str_radix(addr_str.trim_start_matches("0x"), 16)
                 } else {
                     u32::from_str_radix(addr_str, 10)
                 }
@@ -146,7 +146,7 @@ impl Config {
                 })?;
                 let size = if let Some(size_str) = dump.value_of("size") {
                     let size = if size_str.starts_with("0x") {
-                        u32::from_str_radix(size_str.trim_left_matches("0x"), 16)
+                        u32::from_str_radix(size_str.trim_start_matches("0x"), 16)
                     } else {
                         u32::from_str_radix(size_str, 10)
                     }
@@ -187,7 +187,7 @@ impl Config {
             for _ in 0..writes {
                 let addr_str = value_iter.next().unwrap();
                 let addr = if addr_str.starts_with("0x") {
-                    u32::from_str_radix(addr_str.trim_left_matches("0x"), 16)
+                    u32::from_str_radix(addr_str.trim_start_matches("0x"), 16)
                 } else {
                     u32::from_str_radix(addr_str, 10)
                 }
@@ -201,7 +201,7 @@ impl Config {
                 })?;
                 let value_str = value_iter.next().unwrap();
                 let word = if value_str.starts_with("0x") {
-                    u32::from_str_radix(value_str.trim_left_matches("0x"), 16)
+                    u32::from_str_radix(value_str.trim_start_matches("0x"), 16)
                 } else {
                     u32::from_str_radix(value_str, 10)
                 };
@@ -246,12 +246,12 @@ impl Config {
                         } else {
                             return Err(CliError {
                                 description: format!(
-                                "the file '{}' does not exist.\nNote: If you were trying to \
+                                    "the file '{}' does not exist.\nNote: If you were trying to \
                                  provide a value, the integer conversion failed with this error: \
                                  {}",
-                                path.display(),
-                                e
-                            ),
+                                    path.display(),
+                                    e
+                                ),
                             }
                             .into());
                         }
@@ -264,7 +264,7 @@ impl Config {
         } else if let Some(exec) = cli.subcommand_matches("exec") {
             let addr_str = exec.value_of("addr").unwrap();
             let addr = if addr_str.starts_with("0x") {
-                u32::from_str_radix(addr_str.trim_left_matches("0x"), 16)
+                u32::from_str_radix(addr_str.trim_start_matches("0x"), 16)
             } else {
                 u32::from_str_radix(addr_str, 10)
             }
@@ -279,7 +279,7 @@ impl Config {
         } else if let Some(reset64) = cli.subcommand_matches("reset64") {
             let addr_str = reset64.value_of("addr").unwrap();
             let addr = if addr_str.starts_with("0x") {
-                u32::from_str_radix(addr_str.trim_left_matches("0x"), 16)
+                u32::from_str_radix(addr_str.trim_start_matches("0x"), 16)
             } else {
                 u32::from_str_radix(addr_str, 10)
             }
@@ -296,7 +296,7 @@ impl Config {
         } else if let Some(clear) = cli.subcommand_matches("clear") {
             let addr_str = clear.value_of("addr").unwrap();
             let address = if addr_str.starts_with("0x") {
-                u32::from_str_radix(addr_str.trim_left_matches("0x"), 16)
+                u32::from_str_radix(addr_str.trim_start_matches("0x"), 16)
             } else {
                 u32::from_str_radix(addr_str, 10)
             }
@@ -309,7 +309,7 @@ impl Config {
             })?;
             let num_bytes_str = clear.value_of("num_bytes").unwrap();
             let num_bytes = if num_bytes_str.starts_with("0x") {
-                u32::from_str_radix(num_bytes_str.trim_left_matches("0x"), 16)
+                u32::from_str_radix(num_bytes_str.trim_start_matches("0x"), 16)
             } else {
                 u32::from_str_radix(num_bytes_str, 10)
             }
@@ -335,7 +335,7 @@ impl Config {
         } else if let Some(fill) = cli.subcommand_matches("fill") {
             let addr_str = fill.value_of("addr").unwrap();
             let address = if addr_str.starts_with("0x") {
-                u32::from_str_radix(addr_str.trim_left_matches("0x"), 16)
+                u32::from_str_radix(addr_str.trim_start_matches("0x"), 16)
             } else {
                 u32::from_str_radix(addr_str, 10)
             }
@@ -348,7 +348,7 @@ impl Config {
             })?;
             let num_bytes_str = fill.value_of("num_bytes").unwrap();
             let num_bytes = if num_bytes_str.starts_with("0x") {
-                u32::from_str_radix(num_bytes_str.trim_left_matches("0x"), 16)
+                u32::from_str_radix(num_bytes_str.trim_start_matches("0x"), 16)
             } else {
                 u32::from_str_radix(num_bytes_str, 10)
             }
@@ -361,7 +361,7 @@ impl Config {
             })?;
             let fill_byte_str = fill.value_of("fill_byte").unwrap();
             let fill_byte = if fill_byte_str.starts_with("0x") {
-                u8::from_str_radix(fill_byte_str.trim_left_matches("0x"), 16)
+                u8::from_str_radix(fill_byte_str.trim_start_matches("0x"), 16)
             } else {
                 u8::from_str_radix(fill_byte_str, 10)
             }
